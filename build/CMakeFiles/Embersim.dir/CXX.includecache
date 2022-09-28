@@ -1,0 +1,16 @@
+#IncludeRegexLine: ^[ 	]*[#%][ 	]*(include|import)[ 	]*[<"]([^">]+)([">])
+
+#IncludeRegexScan: ^.*$
+
+#IncludeRegexComplain: ^$
+
+#IncludeRegexTransform: 
+
+/home/viktor/programs/Embersim/Embersim.cpp
+Embersim.h
+/home/viktor/programs/Embersim/Embersim.h
+
+/home/viktor/programs/Embersim/Embersim.h
+iostream
+-
+
