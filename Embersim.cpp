@@ -118,6 +118,7 @@ double atm_temp_model(double alt) {
 		std::cout << "error\n";
 		return 0;
 	}
+	return 0;
 }
 
 double atm_dens_model(double alt) {
