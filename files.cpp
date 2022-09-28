@@ -9,7 +9,6 @@ void read_csv(std::string Input_file) {
 	// which is the standard and iterates the input csv
 	// to parse the data into two strings.
 
-	Timer timer;
 	std::cout << "Reading csv...\n";
 
 	std::ifstream Infile;
@@ -49,7 +48,6 @@ void write_csv(std::string Output_file) {
 	// This function runs the simulation loop
 	// and parses the solutions to the output .csv file.
 
-	Timer timer;
 	std::cout << "Printing to csv...\n";
 
 	std::ofstream Outfile;
