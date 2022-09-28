@@ -139,7 +139,7 @@ double dyn_pres_model(double vel, double alt) {
 int main() {
 
 	std::string Output_file = "aerodynamics.csv";
-	std::string Input_file = "raw_ascent_pattern.csv";
+	std::string Input_file = "asc_pattern.csv";
 
 	read_csv(Input_file);
 	write_csv(Output_file);

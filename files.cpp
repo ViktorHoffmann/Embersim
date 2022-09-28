@@ -12,7 +12,7 @@ void read_csv(std::string Input_file) {
 	std::cout << "Reading csv...\n";
 
 	std::ifstream Infile;
-	Infile.open("raw_ascent_pattern.csv");
+	Infile.open("asc_pattern.csv");
 
 	int i = 0; int j = 0;
 	while (Infile.good()) {
