@@ -6,6 +6,7 @@
 #define _USE_MATH_DEFINES
 #include <iostream>
 #include <fstream>
+#include <filesystem>
 #include <string>
 #include <sstream>
 #include <vector>
@@ -21,7 +22,7 @@ double atm_dens_model(double alt);
 double dyn_pres_model(double vel, double alt);
 
 // File management
-void read_csv(std::string Input_file);
+int read_csv(std::string Input_file);
 void write_csv(std::string Output_file);
 
 #endif // !EMBERSIM_H_

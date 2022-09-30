@@ -3,16 +3,23 @@
 std::vector<double> alt;		                                                // Altitude        [m]
 std::vector<double> vel;                                                        // Velocity        [m/s]
 
-void read_csv(std::string Input_file) {
+int read_csv(std::string Input_file) {
 	// This function anticipates
 	// that the input csv only has two columns
 	// which is the standard and iterates the input csv
 	// to parse the data into two strings.
 
-	std::cout << "Reading csv...\n";
-
+	std::string path = std::filesystem::current_path().string();
 	std::ifstream Infile;
-	Infile.open("asc_pattern.csv");
+	std::cout << path + Input_file << std::endl;
+	Infile.open(path + Input_file);
+
+	if (!Infile.good()) {
+		std::cerr << "Can't open input file\n" << std::endl;
+		return 1;
+	}
+	
+	std::cout << "Reading csv...\n";
 
 	int i = 0; int j = 0;
 	while (Infile.good()) {
@@ -42,6 +49,7 @@ void read_csv(std::string Input_file) {
 	std::cout << (alt.size() * (vel.size() <= alt.size()) + (vel.size() * (vel.size() > alt.size()))) << " lines parsed\n";
 	std::cout << (alt.size() + vel.size()) << " elements parsed\n";
 	std::cout << "Reading done\n";
+	return 0;
 }
 
 void write_csv(std::string Output_file) {
