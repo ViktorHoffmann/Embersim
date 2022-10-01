@@ -22,6 +22,7 @@ double atm_dens_model(double alt);
 double dyn_pres_model(double vel, double alt);
 
 // File management
+std::string find_data_path(void);
 int read_csv(std::string Input_file);
 void write_csv(std::string Output_file);
 

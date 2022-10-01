@@ -3,19 +3,31 @@
 std::vector<double> alt;		                                                // Altitude        [m]
 std::vector<double> vel;                                                        // Velocity        [m/s]
 
-int read_csv(std::string Input_file) {
-	// This function anticipates
-	// that the input csv only has two columns
-	// which is the standard and iterates the input csv
-	// to parse the data into two strings.
+std::string find_data_path(void) {
+	//return path of "data" folder inside of Embersim folder
 
-	std::string path = std::filesystem::current_path().string();
+	std::string working_dir_path = std::filesystem::current_path().string();
+	std::cout << working_dir_path << std::endl;
+	std::size_t found = working_dir_path.find("Embersim\\");
+
+	if (found != std::string::npos) {
+		std::string data_dir_path = working_dir_path.erase(found) + "Embersim\\data\\";
+		std::cout << data_dir_path << std::endl;
+		return data_dir_path;
+	}
+	else {
+		std::cout << "error: couldn't find data directory" << std::endl;
+	}
+}
+
+int read_csv(std::string Input_file) {
+	// This function reads the .csv columns
+
 	std::ifstream Infile;
-	std::cout << path + Input_file << std::endl;
-	Infile.open(path + Input_file);
+	Infile.open(find_data_path() + Input_file);
 
 	if (!Infile.good()) {
-		std::cerr << "Can't open input file\n" << std::endl;
+		std::cerr << "error: can't open input file\n" << std::endl;
 		return 1;
 	}
 	
@@ -59,7 +71,12 @@ void write_csv(std::string Output_file) {
 	std::cout << "Printing to csv...\n";
 
 	std::ofstream Outfile;
-	Outfile.open(Output_file);
+	Outfile.open(find_data_path() + Output_file);
+
+	if (!Outfile.good()) {
+		std::cerr << "error: can't open output file\n" << std::endl;
+		return;
+	}
 
 	Outfile << "Altitude [m]" << ";" << "Velocity [m/s]" << ";" << "Temperature [K]"
 		<< ";" << "Static Pressure [Pa]" << ";" << "Static Density [kg/m^3]" << ";" << "Dynamic Pressure [Pa]" << "\n";
