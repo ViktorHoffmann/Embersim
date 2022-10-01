@@ -7,12 +7,15 @@ std::string find_data_path(void) {
 	//return path of "data" folder inside of Embersim folder
 
 	std::string working_dir_path = std::filesystem::current_path().string();
-	std::cout << working_dir_path << std::endl;
-	std::size_t found = working_dir_path.find("Embersim\\");
+	std::size_t win_path_pos = working_dir_path.find("Embersim\\");
+	std::size_t lin_path_pos = working_dir_path.find("Embersim/");
 
-	if (found != std::string::npos) {
-		std::string data_dir_path = working_dir_path.erase(found) + "Embersim\\data\\";
-		std::cout << data_dir_path << std::endl;
+	if (win_path_pos != std::string::npos) {
+		std::string data_dir_path = working_dir_path.erase(win_path_pos) + "Embersim\\data\\";
+		return data_dir_path;
+	}
+	if (lin_path_pos != std::string::npos) {
+		std::string data_dir_path = working_dir_path.erase(lin_path_pos) + "Embersim/data/";
 		return data_dir_path;
 	}
 	else {
@@ -58,7 +61,7 @@ int read_csv(std::string Input_file) {
 			}
 		}
 	}
-	std::cout << (alt.size() * (vel.size() <= alt.size()) + (vel.size() * (vel.size() > alt.size()))) << " lines parsed\n";
+	std::cout << (alt.size() * (vel.size() <= alt.size()) + (vel.size() * (vel.size() > alt.size()))) << " lines and ";
 	std::cout << (alt.size() + vel.size()) << " elements parsed\n";
 	std::cout << "Reading done\n";
 	return 0;
