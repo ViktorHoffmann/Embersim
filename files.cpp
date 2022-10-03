@@ -123,7 +123,7 @@ int write_csv(std::string Output_file, std::vector<std::string> Header_row, std:
 			<< Output[i].atm_temp << ";"
 			<< Output[i].atm_pres << ";"
 			<< Output[i].atm_dens << ";"
-			<< Output[i].dyn_pres << ";";
+			<< Output[i].dyn_pres;
 		Outfile << "\n";
 	}
 
