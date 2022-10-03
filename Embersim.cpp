@@ -140,8 +140,6 @@ int main() {
 	std::string Output_file = "aerodynamics.csv";
 	std::string Input_file = "asc_pattern.csv";
 
-	int cols = 6;
-
 	std::vector<altvel> altvel = read_csv(Input_file);
 
 	// initialize Header row

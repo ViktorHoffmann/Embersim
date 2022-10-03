@@ -23,29 +23,6 @@ std::string find_data_path(void) {
 	return "";
 }
 
-int file_len(std::string Input_file) {
-	// Returns row number of file without the header row
-	std::ifstream Infile;
-	Infile.open(find_data_path() + Input_file);
-
-	if (!Infile.good()) {
-		std::cout << "\u001b[31merror:\u001b[0m can't open input file\n" << std::endl;
-		return 1;
-	}
-
-	int rows = 0;
-	while (Infile.good()) {
-		std::string line;
-		while (getline(Infile, line)) {
-			std::istringstream iline(line);
-			while (getline(iline, line, '\n')) {
-				rows++;
-			}
-		}
-	}
-	return rows;
-}
-
 std::vector<altvel> read_csv(std::string Input_file) {
 	// This function reads the .csv columns
 

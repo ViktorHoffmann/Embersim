@@ -32,7 +32,6 @@ struct Output_data {
 };
 
 std::string				find_data_path(void);
-int						file_len(std::string Input_file);
 std::vector<altvel>		read_csv(std::string Input_file);
 int						write_csv(std::string Output_file, std::vector<std::string> Header_row, std::vector<Output_data> Output_data);
 
