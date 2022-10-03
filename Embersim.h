@@ -22,8 +22,18 @@ double atm_dens_model(double alt);
 double dyn_pres_model(double vel, double alt);
 
 // File management
-std::string find_data_path(void);
-int read_csv(std::string Input_file);
-void write_csv(std::string Output_file);
+// initialize altvel struct for input vector
+struct altvel {
+	double alt, vel;
+};
+// initialize Output_data struct for output vector
+struct Output_data {
+	double alt, vel, atm_temp, atm_pres, atm_dens, dyn_pres;
+};
+
+std::string				find_data_path(void);
+int						file_len(std::string Input_file);
+std::vector<altvel>		read_csv(std::string Input_file);
+int						write_csv(std::string Output_file, std::vector<std::string> Header_row, std::vector<Output_data> Output_data);
 
 #endif // !EMBERSIM_H_

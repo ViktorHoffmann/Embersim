@@ -137,12 +137,37 @@ double dyn_pres_model(double vel, double alt) {
 }
 
 int main() {
-
 	std::string Output_file = "aerodynamics.csv";
 	std::string Input_file = "asc_pattern.csv";
 
-	read_csv(Input_file);
-	write_csv(Output_file);
+	int cols = 6;
+
+	std::vector<altvel> altvel = read_csv(Input_file);
+
+	// initialize Header row
+	std::vector<std::string> Header_row;
+	Header_row.push_back("Altitude [m]");
+	Header_row.push_back("Velocity [m/s]");
+	Header_row.push_back("Temperature [K]");
+	Header_row.push_back("Static Pressure [Pa]");
+	Header_row.push_back("Static Density [kg/m^3]");
+	Header_row.push_back("Dynamic Pressure [Pa]");
+
+
+	std::vector<Output_data> Output;
+	
+	// sim loop
+	for (int i = 0; i < altvel.size(); i++) {
+		Output_data Output_tmp = { altvel[i].alt,
+			altvel[i].vel,
+			atm_temp_model(altvel[i].alt),
+			atm_pres_model(altvel[i].alt),
+			atm_dens_model(altvel[i].alt),
+			dyn_pres_model(altvel[i].vel,altvel[i].alt) };
+		Output.push_back(Output_tmp);
+	}
+
+	write_csv(Output_file, Header_row, Output);
 
 	return 0;
 }

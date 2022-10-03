@@ -1,5 +1,5 @@
-Altitude [m];Velocity [m/s];Temperature [K];Static Pressure [Pa];Static Density [kg/m^3];Dynamic Pressure [Pa]
-1;1;288.143;101313;1.22486;0.61243
-2;2;288.137;101301;1.22474;2.44949
-3;3;288.13;101289;1.22463;5.51081
-4;4;288.124;101277;1.22451;9.79606
+Altitude [m];Velocity [m/s];Temperature [K];Static Pressure [Pa];Static Density [kg/m^3];Dynamic Pressure [Pa];
+1;1;288.143;101313;1.22486;0.61243;
+2;2;288.137;101301;1.22474;2.44949;
+3;3;288.13;101289;1.22463;5.51081;
+4;4;288.124;101277;1.22451;9.79606;
