@@ -75,9 +75,6 @@ std::vector<altvel> read_csv(std::string Input_file) {
 
 int write_csv(std::string Output_file, std::vector<std::string> Header_row, std::vector<Output_data> Output) {
 	// This function parses the solutions to the output .csv file.
-	/* todo:
-		- function takes output file as string, header row as array and data struct vector
-	*/
 
 	std::ofstream Outfile;
 	Outfile.open(find_data_path() + Output_file);
