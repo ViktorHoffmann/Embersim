@@ -23,6 +23,105 @@ std::string find_data_path(void) {
 	return "";
 }
 
+
+std::vector<Output_data> find_max(std::string Input_file) {
+	//todo:
+	//	- find max in all columns
+	//	- find timestamp of each max
+	//	- return vector as		Output_data | Output_data | Output_data ... (unit)
+	//								    123 |	      456 |		    789	... (time)
+
+	std::ifstream Infile;
+	Infile.open(find_data_path() + Input_file);
+
+	if (!Infile.good()) {
+		std::cout << itfAnsi("red", "zero", "zero", "error: ") << "can't read file\n" << std::endl;
+	}
+
+	double max_alt = 0, max_vel = 0, max_atm_temp = 0, max_atm_pres = 0, max_atm_dens = 0, max_dyn_pres = 0;
+	int max_alt_stamp, max_vel_stamp, max_atm_temp_stamp, max_atm_pres_stamp, max_atm_dens_stamp, max_dyn_pres_stamp;
+	std::vector<Output_data> result;
+	Output_data result_tmp;
+
+	int i = 0; int j = 0;
+	while (Infile.good()) {
+		std::string line;
+		// Read whole line
+		while (getline(Infile, line))
+		{
+			std::istringstream iline(line);
+			// Seperate line by the delimiter
+			while (getline(iline, line, ';'))
+			{
+				if (j == 5) {
+					if (max_dyn_pres < strtod(line.c_str(), NULL)) {
+						max_dyn_pres = strtod(line.c_str(), NULL);
+						max_dyn_pres_stamp = i;
+					}
+					i++;  j = 0;
+				}
+				else if (j == 4) {
+					if (max_atm_dens < strtod(line.c_str(), NULL)) {
+						max_atm_dens = strtod(line.c_str(), NULL);
+						max_atm_dens_stamp = i;
+					}
+					j++;
+				}
+				else if (j == 3) {
+					if (max_atm_pres < strtod(line.c_str(), NULL)) {
+						max_atm_pres = strtod(line.c_str(), NULL);
+						max_atm_pres_stamp = i;
+					}
+					j++;
+				}
+				else if (j == 2) {
+					if (max_atm_temp < strtod(line.c_str(), NULL)) {
+						max_atm_temp = strtod(line.c_str(), NULL);
+						max_atm_temp_stamp = i;
+					}
+					j++;
+				}
+				else if (j == 1)
+				{
+					// Col 2: vel
+					if (max_vel < strtod(line.c_str(), NULL)) {
+						max_vel = strtod(line.c_str(), NULL);
+						max_vel_stamp = i;
+					}
+					j++;
+				}
+				else if (j == 0)
+				{
+					// Col 1: alt
+					if (max_alt < strtod(line.c_str(), NULL)) {
+						max_alt = strtod(line.c_str(), NULL);
+						max_alt_stamp = i;
+					}
+					j++;
+				}
+			}
+		}
+	}
+
+	result_tmp.alt = max_alt;
+	result_tmp.vel = max_vel;
+	result_tmp.atm_temp = max_atm_temp;
+	result_tmp.atm_pres = max_atm_pres;
+	result_tmp.atm_dens = max_atm_dens;
+	result_tmp.dyn_pres = max_dyn_pres;
+	result.push_back(result_tmp);
+
+	result_tmp.alt = max_alt_stamp;
+	result_tmp.vel = max_vel_stamp;
+	result_tmp.atm_temp = max_atm_temp_stamp;
+	result_tmp.atm_pres = max_atm_pres_stamp;
+	result_tmp.atm_dens = max_atm_dens_stamp;
+	result_tmp.dyn_pres = max_dyn_pres_stamp;
+	result.push_back(result_tmp);
+
+	return result;
+}
+
 std::vector<altvel> read_csv(std::string Input_file) {
 	// This function reads the .csv columns
 
@@ -38,6 +137,7 @@ std::vector<altvel> read_csv(std::string Input_file) {
 	std::vector<altvel> altvel_tmp;
 
 	std::cout << "Reading csv...\n";
+	//todo: if csv header found skip it
 	int i = 0; int j = 0;
 	while (Infile.good()) {
 		std::string line;

@@ -94,39 +94,17 @@ std::string itfAnsi(std::string fg, std::string o1, std::string o2, std::string 
 
 void itfStartup(void) {
 	itfClrscr();
-	std::cout << itfAnsi("red", "zero", "zero",   "				   --- Welcome to Embersim ---") << std::endl;
-	std::cout << itfAnsi("white", "zero", "zero", "				following commands are available:\n") << std::endl;
+	std::cout << itfAnsi("red", "zero", "zero",   "E m b e r s i m") << std::endl;
+	std::cout << itfAnsi("white", "zero", "zero", "following commands are available:\n") << std::endl;
 	std::cout << itfAnsi("white", "zero", "zero", "-h to show this list of commands") << std::endl;
 	std::cout << itfAnsi("white", "zero", "zero", "-c to calculate data from flightprofile") << std::endl;
+	std::cout << itfAnsi("white", "zero", "zero", "   -v for verbose") << std::endl;
 	std::cout << itfAnsi("white", "zero", "zero", "-x to exit the program\n") << std::endl;
 }
 
-void itfCommand(void) {
+std::string itfCommand(void) {
 	std::string userIn;
-	std::cin >> userIn;
-
-	while (userIn.compare("-x")) {
-		if (!userIn.compare("-h")) {
-			itfStartup();
-		}
-
-		else if (!userIn.compare("-c")) {
-			std::cout << "select the file to read from the data folder:" << std::endl;
-			std::string path = find_data_path();
-			for (const auto& entry : std::filesystem::directory_iterator(path)) {
-				std::cout << entry.path() << std::endl;
-			}
-
-			std::string file;
-			std::cin >> file;
-			calcModel(file);
-		}
-
-		else {
-			std::cout << itfAnsi("red", "zero", "zero", "unknown command") << std::endl;
-		}
-
-		std::cin >> userIn;
-	}
-	std::cout << itfAnsi("red", "zero", "zero", "closing") << std::endl;
+	std::cout << itfAnsi("yellow", "zero", "zero", "Embersim> ");
+	std::getline(std::cin, userIn);
+	return userIn;
 }

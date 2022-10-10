@@ -138,7 +138,7 @@ double dyn_pres_model(double vel, double alt) {
 
 void calcModel(std::string Input_file) {
 
-	std::string Output_file = "aerodynamics.csv";
+	std::string Output_file = "cal_result.csv";
 	std::vector<altvel> altvel = read_csv(Input_file);
 
 	// initialize Header row
