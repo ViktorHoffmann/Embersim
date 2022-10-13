@@ -9,7 +9,8 @@ project ("Embersim")
 add_executable (Embersim "Embersim.cpp" "Embersim.h" "files.cpp" "models.cpp" "interface.cpp")
 
 if (CMAKE_VERSION VERSION_GREATER 3.12)
-  set_property(TARGET Embersim PROPERTY CXX_STANDARD 2a)
+  set_property(TARGET Embersim PROPERTY CXX_STANDARD 20)
 endif()
 
+set (CMAKE_CXX_FLAGS "-lstdc++fs -std=c++2a")
 # TODO: Fügen Sie bei Bedarf Tests hinzu, und installieren Sie Ziele.
