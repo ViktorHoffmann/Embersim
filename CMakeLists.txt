@@ -6,7 +6,7 @@ cmake_minimum_required (VERSION 3.8)
 project ("Embersim")
 
 # Fügen Sie der ausführbaren Datei dieses Projekts eine Quelle hinzu.
-add_executable (Embersim "Embersim.cpp" "Embersim.h" "files.cpp" "models.cpp" "interface.cpp")
+add_executable (Embersim "Embersim.cpp" "Embersim.h" "files.cpp" "models.cpp" "interface.cpp" "gnuplot-iostream.h")
 
 if (CMAKE_VERSION VERSION_GREATER 3.12)
   set_property(TARGET Embersim PROPERTY CXX_STANDARD 20)
