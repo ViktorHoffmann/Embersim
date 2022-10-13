@@ -1,3 +1,0 @@
-/home/viktor/programs/Embersim/build/CMakeFiles/rebuild_cache.dir
-/home/viktor/programs/Embersim/build/CMakeFiles/edit_cache.dir
-/home/viktor/programs/Embersim/build/CMakeFiles/Embersim.dir
