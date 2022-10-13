@@ -12,4 +12,6 @@ if (CMAKE_VERSION VERSION_GREATER 3.12)
   set_property(TARGET Embersim PROPERTY CXX_STANDARD 20)
 endif()
 
+set (CMAKE_CXX_FLAGS "-lstdc++fs -std=c++20")
+
 # TODO: Fügen Sie bei Bedarf Tests hinzu, und installieren Sie Ziele.
