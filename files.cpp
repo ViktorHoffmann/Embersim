@@ -1,35 +1,62 @@
 #include "Embersim.h"
 
 std::string find_data_path(void) {
-	//return path of "data" folder inside of Embersim folder
+	/*
+	* To find the data files for reading and writing, the data folder containing the files
+	* has to be found first. Because the name of the top directory can differ its actual
+	* name has to be found by the first occurence of "Embersim", following that the full
+	* directory name is taken and passed on to find the path of the data folder contained.
+	*/
 
 	std::string working_dir_path = std::filesystem::current_path().string();
-	std::size_t win_path_pos = working_dir_path.find("Embersim\\");
+	std::size_t win_path_pos = working_dir_path.find("\\Embersim");
 
 	if (win_path_pos != std::string::npos) {
-		std::string data_dir_path = working_dir_path.erase(win_path_pos) + "Embersim\\data\\";
+		std::string top_dir_path = working_dir_path.erase(0, win_path_pos + 1);
+		std::string val = "";
+		std::string top_dir_name;
+		int pos = 0;
+
+		while (val != "\\") {
+			val = top_dir_path[pos];
+			top_dir_name = top_dir_name + val;
+			pos++;
+		}
+
+		std::string data_dir_path = std::filesystem::current_path().string().erase(win_path_pos) + "\\" + top_dir_name + "data\\";
 		return data_dir_path;
 	}
 
-	std::size_t lin_path_pos = working_dir_path.find("Embersim/");
+	std::size_t lin_path_pos = working_dir_path.find("/Embersim");
+
 	if (lin_path_pos != std::string::npos) {
-		std::string data_dir_path = working_dir_path.erase(lin_path_pos) + "Embersim/data/";
+		std::string top_dir_path = working_dir_path.erase(0, lin_path_pos + 1);
+		std::string val = "";
+		std::string top_dir_name;
+		int pos = 0;
+
+		while (val != "/") {
+			val = top_dir_path[pos];
+			top_dir_name = top_dir_name + val;
+			pos++;
+		}
+
+		std::string data_dir_path = std::filesystem::current_path().string().erase(lin_path_pos) + "/" + top_dir_name + "data/";
 		return data_dir_path;
 	}
+
 	else {
 		std::cout << "\u001b[31merror:\u001b[0m couldn't find data directory" << std::endl;
 		return "";
 	}
+
 	return "";
 }
 
 
 std::vector<Output_data> find_max(std::string Input_file) {
-	//todo:
-	//	- find max in all columns
-	//	- find timestamp of each max
-	//	- return vector as		Output_data | Output_data | Output_data ... (unit)
-	//								    123 |	      456 |		    789	... (time)
+	// find max values and location of each column and return them
+	// as Output_data vector with values in col1 and position in col2
 
 	std::ifstream Infile;
 	Infile.open(find_data_path() + Input_file);
